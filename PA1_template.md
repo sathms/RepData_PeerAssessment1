@@ -4,7 +4,7 @@ author: "sathms"
 date: "16/05/2020"
 output: 
   html_document: 
-    keep_md: yes
+    keep_md: TRUE
 ---
 
 
@@ -38,9 +38,10 @@ library(lubridate)
 ```r
 sourceURL <- 'https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip'
 destFile  <-  paste(getwd(),"Factivity.zip",sep = "/")
-download.file(sourceURL, destFile)
-unzip(destFile)
-
+if(!file.exists(destFile)){
+  download.file(sourceURL, destFile)
+  unzip(destFile)
+}
 activityDF <- read.csv('activity.csv')
 dim(activityDF)
 ```

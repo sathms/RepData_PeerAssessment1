@@ -2,11 +2,14 @@
 title: "Reproducible Research PA1"
 author: "sathms"
 date: "16/05/2020"
-output: html_document
+output: 
+  html_document: 
+    keep_md: TRUE
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+setwd("~/Data Science/RepData_PeerAssessment1")
 ```
 
 ## Introduction
@@ -25,9 +28,10 @@ library(lubridate)
 ```{r GetData}
 sourceURL <- 'https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip'
 destFile  <-  paste(getwd(),"Factivity.zip",sep = "/")
-download.file(sourceURL, destFile)
-unzip(destFile)
-
+if(!file.exists(destFile)){
+  download.file(sourceURL, destFile)
+  unzip(destFile)
+}
 activityDF <- read.csv('activity.csv')
 dim(activityDF)
 names(activityDF)
